@@ -70,6 +70,7 @@ func do(line string) {
 
 	if err != nil {
 		fmt.Println(err.Error())
+		return
 	}
 
 	request.Header.Set("Content-Type", "application/json; charset=UTF-8")
@@ -77,7 +78,8 @@ func do(line string) {
 	client := &http.Client{}
 	response, err := client.Do(request)
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println(Red("\nHubtalk error") + ": can't contact server.\n")
+		return
 	}
 	defer response.Body.Close()
 
